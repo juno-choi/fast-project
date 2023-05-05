@@ -15,8 +15,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/hello")
-def hello():
+@app.get("/hello/{name}")
+def hello(name: str):
     return {
-        "message" : "hello :)"
+        "message" : "hello :)"+ name
     }
