@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
+from question import question_router 
+
 app = FastAPI()
 
 origins = [
@@ -18,5 +20,7 @@ app.add_middleware(
 @app.get("/hello/{name}")
 def hello(name: str):
     return {
-        "message" : "hello :)"+ name
+        "message" : name
     }
+
+app.include_router(question_router.router)
