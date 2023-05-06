@@ -1,11 +1,20 @@
 <script>
-  let message;
+  let question_list = [];
 
-  fetch("http://127.0.0.1:8000/hello/준호").then((res) => {
+  function get_question_list() {
+    fetch("http://127.0.0.1:8000/v1/question/list").then((res) => {
     res.json().then((json) => {
-      message = json.message;
+      console.log(json);
+      question_list = json;
     });
   });
+  }
+  
+  get_question_list();
 </script>
 
-<h1>{message} ㅎ</h1>
+<ul>
+  {#each question_list as question}
+    <li>{question.subject}</li>
+  {/each}
+</ul>
