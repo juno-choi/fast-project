@@ -1,10 +1,20 @@
 <script>
     export let params = {}
     let question_id = params.question_id
-    console.log('question_id:'+ question_id)
+    let question = {}
+
+    function get_question() {
+        fetch("http://127.0.0.1:8000/v1/question/detail/"+question_id).then((res) => {
+            res.json().then((json) => {
+                question = json
+            })
+        });
+    }
+
+    get_question()
 </script>
 
-<h1>제목</h1>
+<h1>{question.subject}</h1>
 <div>
-    내용
+    {question.content}
 </div>
